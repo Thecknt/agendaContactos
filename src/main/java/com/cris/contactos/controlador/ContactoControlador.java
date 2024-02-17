@@ -4,7 +4,6 @@ import com.cris.contactos.modelo.Contacto;
 import com.cris.contactos.servicio.ContactoServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -47,4 +46,17 @@ public class ContactoControlador {
         return "editar";
     }
 
+    @PostMapping("/editar")
+    public String editar(@ModelAttribute("contacto") Contacto contacto){
+        contactoServicio.guardarContacto(contacto);
+        return "redirect:/";
+    }
+
+    @GetMapping("/eliminar/{id}")
+    public String eliminar(@PathVariable(value="id") int idContacto){
+        Contacto contacto = new Contacto();
+        contacto.setIdContacto(idContacto);
+        contactoServicio.eliminarContacto(contacto);
+        return "redirect:/";
+    }
 }
