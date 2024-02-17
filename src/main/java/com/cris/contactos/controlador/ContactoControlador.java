@@ -25,12 +25,24 @@ public class ContactoControlador {
         return "index";
     }
 
+    @GetMapping("/agregar")
+    public String mostrarAgregar() {
+        return "agregar";
+    }
+
     @PostMapping("/agregar")
-    public String guardarContacto(@ModelAttribute Contacto contacto, Model model) {
+    public String agregar(@ModelAttribute("contactoForm") Contacto contacto){
         String enlaceGoogleMaps = "https://www.google.com/maps/search/" + contacto.getDomicilio() + "+" + contacto.getAltura() +"+" + contacto.getCodigoPostal();
         contacto.setGoogleMaps(enlaceGoogleMaps);
+        System.out.println("Los datos del contacto son: "+ contacto.toString());
         contactoServicio.guardarContacto(contacto);
         return "redirect:/";
+    }
+
+    @GetMapping("/editar")
+    public String mostrarEditar(@ModelAttribute Contacto contacto){
+
+        return "editar";
     }
 
 }
