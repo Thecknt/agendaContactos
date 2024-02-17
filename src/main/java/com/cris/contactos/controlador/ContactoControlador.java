@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -39,9 +40,10 @@ public class ContactoControlador {
         return "redirect:/";
     }
 
-    @GetMapping("/editar")
-    public String mostrarEditar(@ModelAttribute Contacto contacto){
-
+    @GetMapping("/editar/{id}")
+    public String mostrarEditar(@PathVariable(value = "id") int idContacto, ModelMap modelo){
+    Contacto contacto = contactoServicio.buscarContactoPorId(idContacto);
+    modelo.put("contacto", contacto);
         return "editar";
     }
 

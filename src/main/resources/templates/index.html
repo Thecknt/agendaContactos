@@ -24,6 +24,7 @@
                 <th scope="col">Localidad</th>
                 <th scope="col">Cod.Postal</th>
                 <th scope="col">Maps</th>
+                <th scope="col">Opciones</th>
             </tr>
             </thead>
             <tbody>
@@ -39,6 +40,12 @@
                 <td th:text="${contacto.codigoPostal}"></td>
                 <td>
                     <a th:href="${contacto.GoogleMaps}" target="_blank">Ver ubicacion en Google Maps</a>
+                </td>
+                <td class="text-center">
+                    <div class="container">
+                        <a th:href="@{/editar/{id}(id=${contacto.idContacto})}"
+                        class="btn btn-warning btn-sm me-3">Editar</a>
+                    </div>
                 </td>
             </tr>
             </tbody>
